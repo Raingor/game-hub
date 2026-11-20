@@ -2,6 +2,13 @@
 
 独立的原生 TypeScript 游戏导航 Web 项目。奶油纸色、墨绿、橘红的站台与车票视觉，八款游戏各有本地 WebP 角色图片，两款特色车票与六款 CSS 微型棋盘。所有卡片都是原生链接，在当前标签页前往对应的独立 GitHub Pages，不嵌入、不打包游戏代码。
 
+## 在线入口与仓库
+
+- 游戏总入口：**https://raingor.github.io/game-hub/**
+- 独立仓库：https://github.com/Raingor/game-hub
+- 代码提交 `fb8ce2e`，[Pages部署44738131405](https://github.com/Raingor/game-hub/actions/runs/44738131405)成功。
+- 主Agent独立24项单测及严格构建通过；本地与线上各100项浏览器检查、8款真实点击跳转全部通过。
+
 ## 本地运行
 
 要求 Node.js >= 22.12.0，以及 npm。
@@ -100,6 +107,6 @@ scripts/live-links.mjs 不拦截请求的8款实际线上跳转验证
 
 ## 当前验证边界
 
-2026-11-20 实跑：锁文件安装成功，24 项单元测试通过，TypeScript 检查及 Vite 生产构建通过，`node --check scripts/smoke.mjs` 通过。按分工要求，实施 Agent 未启动开发服务器、预览服务器或浏览器。响应式截图、浏览器检查及 Pages 发布由主协调 Agent 接续，不能把脚本已编写视作浏览器已通过，也不能把构建成功视作 Pages 已上线。
+2026-11-20 实跑：锁文件安装成功，主Agent独立24项单测、TypeScript及Vite构建通过。本地4181生产预览和正式Pages均完成100项桌面/手机浏览器检查，无页面/控制台/资源错误；各自另跑不拦截请求的8款真实卡片点击跳转，所有实际URL、HTTP200、游戏标题与同标签页验证通过。线上截图和报告在忽略的artifacts目录，手机为Chrome触屏上下文而非实体设备。
 
 `.github/workflows/deploy.yml` 由主协调 Agent 配置，本实现未覆盖或修改；Git、远端仓库、正式发布与记忆更新均由主协调 Agent 负责。

@@ -58,4 +58,12 @@ GAME_URL=http://127.0.0.1:4181/ npm run test:browser
 - 手机主标题固定预期两行，避免“开玩”二字拆到不同行；三个alt采用原catalog正确名称。
 - 最新生产preview `test:browser`：100项通过，含1440桌面、390/360触屏、24次独立目标链接激活、焦点/筛选/图片/错误检查。
 - 新增 `test:links`，不拦截任何请求；主Agent实际从本地导航逐卡进入8款线上游戏，全部URL/HTTP200/游戏标题/同标签页验证通过。首个一次性脚本误把扫雷预期标题写作“扫雷”，实际为“探雷 · 琥珀探测仪”；仅纠正测试预期，不改游戏或跳转，最终8/8通过。
-- 10张素材逐字节与源文件一致，公开源码预检无凭据/私钥/兄弟运行时依赖。准备独立仓库与Pages发布。
+- 10张素材逐字节与源文件一致，公开源码预检无凭据/私钥/兄弟运行时依赖。
+
+## 正式发布与线上验收（主Agent，2026-11-20）
+- 新建独立公开仓库 https://github.com/Raingor/game-hub ，代码提交 `fb8ce2e`，main已推送，remote不含凭据。
+- Pages设为Actions来源；工作流 https://github.com/Raingor/game-hub/actions/runs/44738131405 成功。
+- 总入口 https://raingor.github.io/game-hub/ 已上线。
+- `GAME_URL=https://raingor.github.io/game-hub/ npm run test:browser`：100项通过，无pageerror/console/HTTP或失败请求错误；1440桌面、390/360触屏、8卡片/10图、键盘/筛选/减少动态效果通过。
+- `GAME_URL=https://raingor.github.io/game-hub/ npm run test:links`：8/8，真实从线上导航点击进入8款游戏，全部实际URL、HTTP200、标题与同标签页检查通过，无请求拦截。
+- 原消消乐及其余游戏本轮未修改；不将构建/依赖/截图/日志/凭据入库。项目已完成发布与线上验收。
