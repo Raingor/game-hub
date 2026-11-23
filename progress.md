@@ -67,3 +67,11 @@ GAME_URL=http://127.0.0.1:4181/ npm run test:browser
 - `GAME_URL=https://raingor.github.io/game-hub/ npm run test:browser`：100项通过，无pageerror/console/HTTP或失败请求错误；1440桌面、390/360触屏、8卡片/10图、键盘/筛选/减少动态效果通过。
 - `GAME_URL=https://raingor.github.io/game-hub/ npm run test:links`：8/8，真实从线上导航点击进入8款游戏，全部实际URL、HTTP200、标题与同标签页检查通过，无请求拦截。
 - 原消消乐及其余游戏本轮未修改；不将构建/依赖/截图/日志/凭据入库。项目已完成发布与线上验收。
+
+## 八卡统一 Joke Bear 头像（2026-11-23）
+- 用户按卡片截图要求：右侧头像都要是 Joke Bear。八款游戏 `character` 全部改为 `classic`，alt 统一以“Joke Bear 头像”开头并保留游戏名；首屏两张全身贴纸不属卡片头像，保持原构图。
+- 仅保留 `classic.webp`、`classic-full.webp`、`usagi-full.webp` 三张必要 WebP；删除卡片不再引用的七张，无失效引用。
+- 单测改为校验 slug/name/url 唯一，并新增八卡 `classic` 与 alt 断言，25/25通过；严格 TS+Vite构建通过。
+- 浏览器脚本新增每视口断言：8张 `.card-character` 的 src 全为 `./characters/classic.webp` 且 alt 以 Joke Bear 开头。本地生产预览与正式Pages均103项通过，无页面/控制台/资源错误；桌面、390、360截图复核八卡头像一致。
+- 代码提交 `a5e6d64` 已推送；Pages工作流 https://github.com/Raingor/game-hub/actions/runs/45156041927 成功。
+- `GAME_URL=https://raingor.github.io/game-hub/ npm run test:links`：8/8真实点击跳转、URL、HTTP200、游戏标题全通过。线上入口 https://raingor.github.io/game-hub/ 已更新。
