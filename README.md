@@ -1,6 +1,6 @@
 # 游戏站台 · 下一站，开玩
 
-独立的原生 TypeScript 游戏导航 Web 项目。奶油纸色、墨绿、橘红的站台与车票视觉，八款游戏各有本地 WebP 角色图片，两款特色车票与六款 CSS 微型棋盘。所有卡片都是原生链接，在当前标签页前往对应的独立 GitHub Pages，不嵌入、不打包游戏代码。
+独立的原生 TypeScript 游戏导航 Web 项目。奶油纸色、墨绿、橘红的站台与车票视觉，八款游戏右侧统一使用本地 Joke Bear（自嘲熊）头像，两款特色车票与六款 CSS 微型棋盘。所有卡片都是原生链接，在当前标签页前往对应的独立 GitHub Pages，不嵌入、不打包游戏代码。
 
 ## 在线入口与仓库
 
@@ -48,7 +48,7 @@ npm run preview
 - 全部 8 款、益智 7 款（包括消消乐）、动作 1 款（地铁快跑）。不显示虚构在线人数、排行或成绩。
 - 原生按钮支持 Tab、Enter、Space；`aria-pressed` 表示当前筛选，实时区域播报结果。
 - 不符合条件的卡片使用 `hidden`，不会留在键盘焦点序列中。
-- 卡片包含游戏名、玩法、控制提示及不同角色的有意义图片替代文字。
+- 卡片包含游戏名、玩法、控制提示；八张卡片右侧头像统一为 Joke Bear，替代文字含游戏名。
 - 页面有跳到列表的跳转链接、可见键盘焦点和 `prefers-reduced-motion` 支持。
 - 无登录、存储、外部字体、第三方运行时请求或产品测试后门。
 
@@ -71,7 +71,7 @@ GAME_URL=https://raingor.github.io/game-hub/ npm run test:browser
 
 脚本检查 1440px 桌面与 390px、360px 触屏：
 
-- 八张卡片及十张角色图片完整加载；无水平溢出。
+- 八张卡片及十张页面图片完整加载；每张卡片头像均为 `classic.webp`（Joke Bear）；无水平溢出。
 - 桌面真实 Tab 遍历八个游戏，检查可见焦点；跳转链接进入游戏区。
 - Enter、Space 操作筛选；触屏使用真实 `tap`；检查 7/1/8 结果、ARIA 状态、恢复显示。
 - 独立硬编码目标列表核对 href，实际点击每张卡片并检查同标签页最终 URL。
@@ -97,13 +97,13 @@ src/games.ts          游戏数据与实际筛选函数
 src/games.test.ts     目的地、内容、唯一性和筛选单元测试
 src/main.ts          语义化导航页面、筛选交互
 src/style.css        响应式站台视觉与 CSS 迷你棋盘
-public/characters/   仅十张必要的自包含 WebP 角色素材
+public/characters/   三张必要 WebP：卡片统一 Joke Bear 头像及两张首屏全身贴纸
 public/ticket.svg    本地站台票券图标
 scripts/smoke.mjs    独立 Chrome 桌面 / 触屏验收
 scripts/live-links.mjs 不拦截请求的8款实际线上跳转验证
 ```
 
-角色素材来自同一工作区的消消乐项目，已将必要的十张 WebP **复制到本项目**；运行时无兄弟目录依赖，不包含 PNG、Three.js 或游戏源包。
+角色素材来自同一工作区的消消乐项目，已将必要的三张 WebP **复制到本项目**；运行时无兄弟目录依赖，不包含 PNG、Three.js 或游戏源包。
 
 ## 当前验证边界
 

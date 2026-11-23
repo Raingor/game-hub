@@ -17,10 +17,14 @@ describe('game destinations', () => {
     expect(games).toHaveLength(8);
     expect(games.map(game => game.slug).sort()).toEqual(Object.keys(expectedUrls).sort());
   });
-  it('has unique slugs, names, URLs and character portraits', () => {
-    for (const key of ['slug', 'name', 'url', 'character'] as const) {
+  it('has unique slugs, names and URLs', () => {
+    for (const key of ['slug', 'name', 'url'] as const) {
       expect(new Set(games.map(game => game[key])).size).toBe(8);
     }
+  });
+  it('uses the Joke Bear portrait for every right-side card avatar', () => {
+    expect(games.every(game => game.character === 'classic')).toBe(true);
+    expect(games.every(game => game.characterAlt.startsWith('Joke Bear 头像'))).toBe(true);
   });
   it.each(games)('$name points to its exact HTTPS Pages destination', game => {
     expect(game.url).toBe(expectedUrls[game.slug]);

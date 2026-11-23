@@ -62,6 +62,7 @@ try {
     check(`${label}: eight real anchor cards`, await visibleCards(page).count() === 8 && await page.locator('a.game-card').count() === 8);
     check(`${label}: all ten local character images decode`, await page.locator('img').count() === 10 && await loadedImages(page));
     check(`${label}: eight meaningful card image alternatives`, await page.locator('.card-character').evaluateAll(images => images.every(img => img.alt.trim().length > 8)));
+    check(`${label}: every right-side card avatar is the Joke Bear portrait`, await page.locator('.card-character').evaluateAll(images => images.length === 8 && images.every(img => img.getAttribute('src') === './characters/classic.webp' && img.alt.startsWith('Joke Bear'))));
     check(`${label}: no iframe or new-tab navigation`, await page.locator('iframe').count() === 0 && await page.locator('.game-card[target]').count() === 0);
     check(`${label}: no horizontal overflow`, await noOverflow(page));
     await page.waitForFunction(() => [...document.querySelectorAll('.hero-copy,.hero-art,.game-card:not([hidden])')].every(el => Number(getComputedStyle(el).opacity) >= .99));
