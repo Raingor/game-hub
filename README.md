@@ -98,7 +98,7 @@ src/games.test.ts     目的地、内容、唯一性和筛选单元测试
 src/main.ts          语义化导航页面、筛选交互
 src/style.css        响应式站台视觉与 CSS 迷你棋盘
 public/characters/   三张必要 WebP：卡片统一 Joke Bear 头像及两张首屏全身贴纸
-public/ticket.svg    本地站台票券图标
+public/favicon.svg   iconfont 站台票券图标
 scripts/smoke.mjs    独立 Chrome 桌面 / 触屏验收
 scripts/live-links.mjs 不拦截请求的8款实际线上跳转验证
 ```
@@ -110,3 +110,7 @@ scripts/live-links.mjs 不拦截请求的8款实际线上跳转验证
 2026-11-20 实跑：锁文件安装成功，主Agent独立24项单测、TypeScript及Vite构建通过。本地4181生产预览和正式Pages均完成100项桌面/手机浏览器检查，无页面/控制台/资源错误；各自另跑不拦截请求的8款真实卡片点击跳转，所有实际URL、HTTP200、游戏标题与同标签页验证通过。线上截图和报告在忽略的artifacts目录，手机为Chrome触屏上下文而非实体设备。
 
 `.github/workflows/deploy.yml` 由主协调 Agent 配置，本实现未覆盖或修改；Git、远端仓库、正式发布与记忆更新均由主协调 Agent 负责。
+
+## 图标来源
+
+页面 favicon 与界面图标于 2026-11-23 通过 opencli 从 [iconfont.cn](https://www.iconfont.cn/) 搜索采集；图标名称、ID、搜索词与落位见根目录 `../icons-source.md`。界面图标统一以 `currentColor` 渲染，favicon 使用本项目主题色。

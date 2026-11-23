@@ -75,3 +75,11 @@ GAME_URL=http://127.0.0.1:4181/ npm run test:browser
 - 浏览器脚本新增每视口断言：8张 `.card-character` 的 src 全为 `./characters/classic.webp` 且 alt 以 Joke Bear 开头。本地生产预览与正式Pages均103项通过，无页面/控制台/资源错误；桌面、390、360截图复核八卡头像一致。
 - 代码提交 `a5e6d64` 已推送；Pages工作流 https://github.com/Raingor/game-hub/actions/runs/45156041927 成功。
 - `GAME_URL=https://raingor.github.io/game-hub/ npm run test:links`：8/8真实点击跳转、URL、HTTP200、游戏标题全通过。线上入口 https://raingor.github.io/game-hub/ 已更新。
+
+## 2026-11-23 · iconfont 图标重采
+
+- 通过 opencli 访问 iconfont.cn 搜索采集页面 favicon 与界面图标，图标名称、ID、搜索词和落位见根目录 `../icons-source.md`。
+- 新增 `public/favicon.svg`，`index.html` 改用该文件；界面图标统一以 `currentColor` 渲染，favicon 使用本项目主题色圆角底。
+- 页面 favicon 改为 iconfont 火车票图标；删除旧 ticket.svg。
+- `npm test`、`npm run build` 通过；浏览器冒烟 103 项通过，截图复核图标尺寸、对比度与语义正常。
+
