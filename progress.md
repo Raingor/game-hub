@@ -90,3 +90,8 @@ GAME_URL=http://127.0.0.1:4181/ npm run test:browser
 - 图标尺寸、移动端断点与圆形按钮对齐在 `style.css` 补充；迷你棋盘 SVG 使用 `currentColor` 继承格子配色。
 - `npm test`、`npm run build` 通过；本地生产预览 103 项浏览器检查通过，桌面与 390/360 触屏截图复核图标清晰、无溢出。
 
+## 2026-11-24 · 卡片与底部提示统一向下箭头
+
+- 按用户截图，八张游戏卡片圆形按钮及底部跳转说明的斜箭头，改用“领取你的快乐车票”按钮内相同的 `arrowDownIcon`。
+- 生产构建通过；1440px / 390px Chrome 实际核对九处 SVG 路径与 CTA 一致、筛选正常、无水平溢出。截图：`artifacts/down-arrows-1440.png`、`artifacts/down-arrows-390.png`。
+

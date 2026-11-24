@@ -40,7 +40,7 @@ function card(game: Game): string {
       <img class="card-character" src="./characters/${game.character}.webp" alt="${game.characterAlt}" width="240" height="240" decoding="async" />
     </div>
     <div class="card-copy">
-      <div class="card-title-row"><h3 id="title-${game.slug}">${game.name}</h3><span class="go-arrow" aria-hidden="true">${arrowUpRightIcon}</span></div>
+      <div class="card-title-row"><h3 id="title-${game.slug}">${game.name}</h3><span class="go-arrow" aria-hidden="true">${arrowDownIcon}</span></div>
       <p id="desc-${game.slug}">${game.description}</p>
       <div class="card-bottom"><span id="controls-${game.slug}" class="controls"><span aria-hidden="true">${keyboardIcon}</span> ${game.controls}</span><span class="play-label" aria-hidden="true">上车开玩</span></div>
     </div>
@@ -76,7 +76,7 @@ app.innerHTML = `
       </div>
       <p class="sr-only" id="filter-status" role="status" aria-live="polite">显示全部 8 款游戏</p>
       <div class="game-grid">${games.map(card).join('')}</div>
-      <p class="departure-note"><span aria-hidden="true">${arrowUpRightIcon}</span> 点击游戏卡片，将在当前页面前往该游戏的独立站点。</p>
+      <p class="departure-note"><span aria-hidden="true">${arrowDownIcon}</span> 点击游戏卡片，将在当前页面前往该游戏的独立站点。</p>
     </section>
     <section class="closing wrap" aria-label="站台寄语"><span class="closing-mark" aria-hidden="true">${sparkleIcon}</span><p>不必赶路，<br><strong>在这里，玩一会儿。</strong></p><span class="closing-en">A LITTLE PLAY.<br>A BETTER DAY.</span></section>
   </main>
