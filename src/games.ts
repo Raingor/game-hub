@@ -1,4 +1,4 @@
-export type Category = 'puzzle' | 'action';
+export type Category = 'puzzle' | 'action' | 'story';
 export type Filter = 'all' | Category;
 
 export interface Game {
@@ -28,6 +28,13 @@ export const games: readonly Game[] = [
     description: '切换轨道、躲开障碍，把风留在身后。',
     controls: '方向键 / 触屏手势', character: 'classic',
     characterAlt: 'Joke Bear 头像，地铁快跑的出发伙伴', tagline: '下一班，追上快乐', featured: true,
+  },
+  {
+    slug: 'joke-bear-story', name: '小熊与未寄出的信', category: 'story',
+    url: 'https://raingor.github.io/joke-bear-story/',
+    description: '陪小熊走过雨天小镇，把今天的小事寄给明天。',
+    controls: '点击 / 轻触推进', character: 'classic',
+    characterAlt: 'Joke Bear 头像，小熊与未寄出的信的故事伙伴', tagline: '慢慢走，也会到', featured: true,
   },
   {
     slug: '2048', name: '2048', category: 'puzzle',

@@ -10,16 +10,17 @@ const expectedUrls: Record<string, string> = {
   'memory-match': 'https://raingor.github.io/memory-match/',
   'sliding-puzzle': 'https://raingor.github.io/sliding-puzzle/',
   sokoban: 'https://raingor.github.io/sokoban/',
+  'joke-bear-story': 'https://raingor.github.io/joke-bear-story/',
 };
 
 describe('game destinations', () => {
-  it('contains exactly the requested eight games', () => {
-    expect(games).toHaveLength(8);
+  it('contains exactly the requested nine games', () => {
+    expect(games).toHaveLength(9);
     expect(games.map(game => game.slug).sort()).toEqual(Object.keys(expectedUrls).sort());
   });
   it('has unique slugs, names and URLs', () => {
     for (const key of ['slug', 'name', 'url'] as const) {
-      expect(new Set(games.map(game => game[key])).size).toBe(8);
+      expect(new Set(games.map(game => game[key])).size).toBe(9);
     }
   });
   it('uses the Joke Bear portrait for every right-side card avatar', () => {
@@ -45,30 +46,33 @@ describe('game destinations', () => {
     expect(game.characterAlt).toContain(game.name);
     expect(game.character).toMatch(/^[a-z-]+$/);
   });
-  it('highlights only the two requested feature games', () => {
-    expect(games.filter(game => game.featured).map(game => game.slug)).toEqual(['xiaoxiaole', 'railway-run']);
+  it('highlights only the three feature games', () => {
+    expect(games.filter(game => game.featured).map(game => game.slug)).toEqual(['xiaoxiaole', 'railway-run', 'joke-bear-story']);
   });
 });
 
 describe('actual UI filtering function', () => {
-  it('all returns all eight games in their display order', () => {
+  it('all returns all nine games in their display order', () => {
     expect(filterGames('all')).toEqual(games);
   });
   it('puzzle includes xiaoxiaole and all six puzzle games', () => {
     const results = filterGames('puzzle');
     expect(results).toHaveLength(7);
     expect(results.every(game => game.category === 'puzzle')).toBe(true);
-    expect(results.map(game => game.slug)).toEqual(games.filter(game => game.slug !== 'railway-run').map(game => game.slug));
+    expect(results.map(game => game.slug)).toEqual(games.filter(game => game.category === 'puzzle').map(game => game.slug));
   });
   it('action returns only railway run', () => {
     expect(filterGames('action').map(game => game.slug)).toEqual(['railway-run']);
   });
+  it('story returns only the joke bear story', () => {
+    expect(filterGames('story').map(game => game.slug)).toEqual(['joke-bear-story']);
+  });
   it('repeated filters do not mutate the source list', () => {
     const before = JSON.stringify(games);
     for (let i = 0; i < 5; i++) {
-      filterGames('action'); filterGames('puzzle'); filterGames('all');
+      filterGames('action'); filterGames('puzzle'); filterGames('story'); filterGames('all');
     }
     expect(JSON.stringify(games)).toBe(before);
-    expect(filterGames('all')).toHaveLength(8);
+    expect(filterGames('all')).toHaveLength(9);
   });
 });

@@ -15,6 +15,7 @@ const destinations = [
   ['memory-match', 'https://raingor.github.io/memory-match/', '记忆翻牌'],
   ['sliding-puzzle', 'https://raingor.github.io/sliding-puzzle/', '数字华容道'],
   ['sokoban', 'https://raingor.github.io/sokoban/', '推箱子'],
+  ['joke-bear-story', 'https://raingor.github.io/joke-bear-story/', '小熊與未寄出的信'],
 ];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const results = [];

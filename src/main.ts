@@ -31,11 +31,16 @@ function card(game: Game): string {
     ? '<div class="candy-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="scene-note" aria-hidden="true">啪！快乐消除中</span>'
     : game.slug === 'railway-run'
       ? '<div class="rail-scene" aria-hidden="true"><i></i><i></i><i></i><b class="train">▰<br>▰</b></div><span class="scene-note" aria-hidden="true">READY, SET, GO!</span>'
-      : miniBoard(game.slug);
+      : game.slug === 'joke-bear-story'
+        ? '<div class="story-scene" aria-hidden="true"><span class="story-moon"></span><span class="story-rain"><i></i><i></i><i></i></span><span class="story-letter"><b></b><b></b><b></b><em></em></span></div><span class="scene-note" aria-hidden="true">一封还没寄出的信</span>'
+        : miniBoard(game.slug);
+  const artTag = game.featured
+    ? game.category === 'action' ? '动作专线' : game.category === 'story' ? '故事专线' : '快乐始发站'
+    : game.tagline;
   return `<a class="game-card ${game.featured ? 'featured' : 'regular'} game-${game.slug}" href="${game.url}" data-game="${game.slug}" aria-labelledby="title-${game.slug}" aria-describedby="desc-${game.slug} controls-${game.slug}">
     <div class="card-art">
       <span class="station-number" aria-hidden="true">${number}</span>
-      <span class="art-tag">${game.featured ? (game.category === 'action' ? '动作专线' : '快乐始发站') : game.tagline}</span>
+      <span class="art-tag">${artTag}</span>
       ${scene}
       <img class="card-character" src="./characters/${game.character}.webp" alt="${game.characterAlt}" width="240" height="240" decoding="async" />
     </div>
@@ -50,41 +55,41 @@ function card(game: Game): string {
 app.innerHTML = `
   <a class="skip-link" href="#games">跳到游戏列表</a>
   <header class="site-header wrap">
-    <a class="brand" href="#" aria-label="游戏站台，回到页面顶部"><span class="brand-icon" aria-hidden="true">${playIcon}</span><span>游戏站台<small>THE PLAY PLATFORM</small></span></a>
+    <a class="brand" href="#" aria-label="CC乐园，回到页面顶部"><span class="brand-icon" aria-hidden="true">${playIcon}</span><span>CC乐园<small>CC PLAYGROUND</small></span></a>
     <a class="header-link" href="#games">选一站，出发 <span aria-hidden="true">${trainIcon}</span></a>
   </header>
   <main>
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-copy"><p class="eyebrow"><span class="route-symbol" aria-hidden="true">${trainIcon}</span> 开往快乐的列车 · 随时发车</p>
         <h1 id="hero-title">下一站，<br><span>开玩<span class="title-spark" aria-hidden="true">${sparkleIcon}</span></span></h1>
-        <p class="hero-description">把日常暂停一下，给快乐留个座。<br>八款小游戏，不用下载，点开就出发。</p>
+        <p class="hero-description">把日常暂停一下，给快乐留个座。<br>九款小游戏，不用下载，点开就出发。</p>
         <a class="hero-cta" href="#games">领取你的快乐车票 <span aria-hidden="true">${ticketIcon}</span></a>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="hero-orbit"></div>
         <div class="floating-label">今日目的地：好心情</div>
-        <div class="hero-ticket"><div class="ticket-top"><span>单程快乐票</span><span>NO. 0008</span></div><div class="ticket-route"><span>日常<small>EVERYDAY</small></span><b>${heartIcon}</b><span>开玩<small>PLAYTIME</small></span></div><div class="ticket-stub"><span>不限时间 · 即刻出发</span><span class="barcode"></span></div></div>
+        <div class="hero-ticket"><div class="ticket-top"><span>单程快乐票</span><span>NO. 0009</span></div><div class="ticket-route"><span>日常<small>EVERYDAY</small></span><b>${heartIcon}</b><span>开玩<small>PLAYTIME</small></span></div><div class="ticket-stub"><span>不限时间 · 即刻出发</span><span class="barcode"></span></div></div>
         <img class="hero-bear" src="./characters/classic-full.webp" alt="" width="280" height="340" />
         <img class="hero-rabbit" src="./characters/usagi-full.webp" alt="" width="240" height="340" />
-        <span class="hero-star star-one">${sparkleIcon}</span><span class="hero-star star-two">${sparkleIcon}</span><span class="platform-sign">PLAY<br><small>PLATFORM 08</small></span>
+        <span class="hero-star star-one">${sparkleIcon}</span><span class="hero-star star-two">${sparkleIcon}</span><span class="platform-sign">PLAY<br><small>PLATFORM 09</small></span>
       </div>
     </section>
     <div class="route-band" aria-hidden="true"><div class="wrap"><span>日常暂停</span><i></i><span>快乐换乘</span><i></i><span>下一站，开玩</span><i></i><span class="band-end">GOOD TIMES AHEAD ${heartIcon}</span></div></div>
     <section class="games-section wrap" id="games" tabindex="-1" aria-labelledby="games-heading">
       <div class="section-head"><div><p class="eyebrow section-kicker">PICK YOUR NEXT STOP</p><h2 id="games-heading">今天，想在哪一站下车？</h2><p class="section-description">动动脑，或是撒腿跑。每一站都有好玩的。</p></div>
-        <div class="filters" role="group" aria-label="按游戏类型筛选"><button type="button" data-filter="all" aria-pressed="true">全部 <span>08</span></button><button type="button" data-filter="puzzle" aria-pressed="false">益智 <span>07</span></button><button type="button" data-filter="action" aria-pressed="false">动作 <span>01</span></button></div>
+        <div class="filters" role="group" aria-label="按游戏类型筛选"><button type="button" data-filter="all" aria-pressed="true">全部 <span>09</span></button><button type="button" data-filter="puzzle" aria-pressed="false">益智 <span>07</span></button><button type="button" data-filter="action" aria-pressed="false">动作 <span>01</span></button><button type="button" data-filter="story" aria-pressed="false">剧情 <span>01</span></button></div>
       </div>
-      <p class="sr-only" id="filter-status" role="status" aria-live="polite">显示全部 8 款游戏</p>
+      <p class="sr-only" id="filter-status" role="status" aria-live="polite">显示全部 9 款游戏</p>
       <div class="game-grid">${games.map(card).join('')}</div>
       <p class="departure-note"><span aria-hidden="true">${heartIcon}</span> 点击游戏卡片，将在当前页面前往该游戏的独立站点。</p>
     </section>
     <section class="closing wrap" aria-label="站台寄语"><span class="closing-mark" aria-hidden="true">${sparkleIcon}</span><p>不必赶路，<br><strong>在这里，玩一会儿。</strong></p><span class="closing-en">A LITTLE PLAY.<br>A BETTER DAY.</span></section>
   </main>
-  <footer class="site-footer wrap"><span>游戏站台 <span class="footer-dot" aria-hidden="true">·</span> 下一站，开玩</span><a href="#">回到站台顶部 ${trainIcon}</a></footer>`;
+  <footer class="site-footer wrap"><span>CC乐园 <span class="footer-dot" aria-hidden="true">·</span> 下一站，开玩</span><a href="#">回到站台顶部 ${trainIcon}</a></footer>`;
 
 const cards = [...document.querySelectorAll<HTMLAnchorElement>('[data-game]')];
 const filterButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
-const labels: Record<Filter, string> = { all: '全部', puzzle: '益智', action: '动作' };
+const labels: Record<Filter, string> = { all: '全部', puzzle: '益智', action: '动作', story: '剧情' };
 
 for (const button of filterButtons) {
   button.addEventListener('click', () => {

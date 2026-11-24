@@ -15,6 +15,7 @@ const destinations = {
   'memory-match': 'https://raingor.github.io/memory-match/',
   'sliding-puzzle': 'https://raingor.github.io/sliding-puzzle/',
   sokoban: 'https://raingor.github.io/sokoban/',
+  'joke-bear-story': 'https://raingor.github.io/joke-bear-story/',
 };
 const errors = [];
 const checks = [];
@@ -59,10 +60,10 @@ try {
       } else await route.continue();
     });
     await page.goto(base, { waitUntil: 'networkidle' });
-    check(`${label}: eight real anchor cards`, await visibleCards(page).count() === 8 && await page.locator('a.game-card').count() === 8);
-    check(`${label}: all ten local character images decode`, await page.locator('img').count() === 10 && await loadedImages(page));
-    check(`${label}: eight meaningful card image alternatives`, await page.locator('.card-character').evaluateAll(images => images.every(img => img.alt.trim().length > 8)));
-    check(`${label}: every right-side card avatar is the Joke Bear portrait`, await page.locator('.card-character').evaluateAll(images => images.length === 8 && images.every(img => img.getAttribute('src') === './characters/classic.webp' && img.alt.startsWith('Joke Bear'))));
+    check(`${label}: nine real anchor cards`, await visibleCards(page).count() === 9 && await page.locator('a.game-card').count() === 9);
+    check(`${label}: all eleven local character images decode`, await page.locator('img').count() === 11 && await loadedImages(page));
+    check(`${label}: nine meaningful card image alternatives`, await page.locator('.card-character').evaluateAll(images => images.every(img => img.alt.trim().length > 8)));
+    check(`${label}: every right-side card avatar is the Joke Bear portrait`, await page.locator('.card-character').evaluateAll(images => images.length === 9 && images.every(img => img.getAttribute('src') === './characters/classic.webp' && img.alt.startsWith('Joke Bear'))));
     check(`${label}: no iframe or new-tab navigation`, await page.locator('iframe').count() === 0 && await page.locator('.game-card[target]').count() === 0);
     check(`${label}: no horizontal overflow`, await noOverflow(page));
     await page.waitForFunction(() => [...document.querySelectorAll('.hero-copy,.hero-art,.game-card:not([hidden])')].every(el => Number(getComputedStyle(el).opacity) >= .99));
@@ -76,7 +77,7 @@ try {
       check('desktop: skip link moves focus to game section', await page.locator('#games').evaluate(el => el === document.activeElement));
       await page.locator('[data-filter="all"]').focus();
       const reached = new Set();
-      for (let index = 0; index < 14; index++) {
+      for (let index = 0; index < 16; index++) {
         await page.keyboard.press('Tab');
         const focused = await page.evaluate(() => {
           const el = document.activeElement;
@@ -87,7 +88,7 @@ try {
           reached.add(focused.slug);
         }
       }
-      check('desktop: all eight game cards reachable with Tab', reached.size === 8);
+      check('desktop: all nine game cards reachable with Tab', reached.size === 9);
     }
 
     await pressFilter(page, 'puzzle', touch);
@@ -102,8 +103,11 @@ try {
     check(`${label}: action filter announces correct state`, await page.locator('[data-filter="action"]').getAttribute('aria-pressed') === 'true' && await page.locator('#filter-status').textContent() === '显示动作 1 款游戏');
     check(`${label}: filtered layout has no overflow`, await noOverflow(page));
     await page.screenshot({ path: `${out}/${label}-action.png`, fullPage: true, animations: 'disabled' });
+    await pressFilter(page, 'story', touch);
+    check(`${label}: story filter displays only the Joke Bear story`, await visibleCards(page).count() === 1 && await page.locator('[data-game="joke-bear-story"]').isVisible());
+    check(`${label}: story filter announces correct state`, await page.locator('[data-filter="story"]').getAttribute('aria-pressed') === 'true' && await page.locator('#filter-status').textContent() === '显示剧情 1 款游戏');
     await pressFilter(page, 'all', touch);
-    check(`${label}: all filter restores eight games and state`, await visibleCards(page).count() === 8 && await page.locator('[data-filter="all"]').getAttribute('aria-pressed') === 'true');
+    check(`${label}: all filter restores nine games and state`, await visibleCards(page).count() === 9 && await page.locator('[data-filter="all"]').getAttribute('aria-pressed') === 'true');
     check(`${label}: all filters have comfortable touch targets`, await page.locator('[data-filter]').evaluateAll(buttons => buttons.every(button => button.getBoundingClientRect().height >= 42)));
 
     for (const [slug, url] of Object.entries(destinations)) {

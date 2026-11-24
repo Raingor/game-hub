@@ -1,13 +1,14 @@
-# 游戏站台 · 下一站，开玩
+# CC乐园 · 下一站，开玩
 
-独立的原生 TypeScript 游戏导航 Web 项目。奶油纸色、墨绿、橘红的站台与车票视觉，八款游戏右侧统一使用本地 Joke Bear（自嘲熊）头像，两款特色车票与六款 CSS 微型棋盘。所有卡片都是原生链接，在当前标签页前往对应的独立 GitHub Pages，不嵌入、不打包游戏代码。
+独立的原生 TypeScript 游戏导航 Web 项目。奶油纸色、墨绿、橘红的站台与车票视觉，九款游戏右侧统一使用本地 Joke Bear（自嘲熊）头像，三款特色场景（消消乐、地铁快跑、小熊与未寄出的信）与六款 CSS 微型棋盘。所有卡片都是原生链接，在当前标签页前往对应的独立 GitHub Pages，不嵌入、不打包游戏代码。
 
 ## 在线入口与仓库
 
 - 游戏总入口：**https://raingor.github.io/game-hub/**
+- 剧情游戏：**https://raingor.github.io/joke-bear-story/**
+- 剧情游戏仓库：https://github.com/Raingor/joke-bear-story
 - 独立仓库：https://github.com/Raingor/game-hub
-- 代码提交 `fb8ce2e`，[Pages部署44738131405](https://github.com/Raingor/game-hub/actions/runs/44738131405)成功。
-- 主Agent独立24项单测及严格构建通过；本地与线上各100项浏览器检查、8款真实点击跳转全部通过。
+- 主Agent独立28项单测及严格构建通过；本地116项浏览器检查通过。
 
 ## 本地运行
 
@@ -28,7 +29,7 @@ npm run preview
 
 生产预览地址 `http://127.0.0.1:4181/`。Vite 使用 `base: './'`，资源可部署于 GitHub Pages 的仓库子路径。
 
-## 八个目的地
+## 九个目的地
 
 | 游戏 | URL |
 | --- | --- |
@@ -40,15 +41,16 @@ npm run preview
 | 记忆翻牌 | https://raingor.github.io/memory-match/ |
 | 数字华容道 | https://raingor.github.io/sliding-puzzle/ |
 | 推箱子 | https://raingor.github.io/sokoban/ |
+| 小熊与未寄出的信 | https://raingor.github.io/joke-bear-story/ |
 
 地铁快跑必须指向 `railway-run-pages`，不能使用源码仓库 `railway-run` 的 Pages 路径。目的地列表与内容在 `src/games.ts` 中维护。
 
 ## 筛选与可访问性
 
-- 全部 8 款、益智 7 款（包括消消乐）、动作 1 款（地铁快跑）。不显示虚构在线人数、排行或成绩。
+- 全部 9 款、益智 7 款（包括消消乐）、动作 1 款（地铁快跑）、剧情 1 款（小熊与未寄出的信）。不显示虚构在线人数、排行或成绩。
 - 原生按钮支持 Tab、Enter、Space；`aria-pressed` 表示当前筛选，实时区域播报结果。
 - 不符合条件的卡片使用 `hidden`，不会留在键盘焦点序列中。
-- 卡片包含游戏名、玩法、控制提示；八张卡片右侧头像统一为 Joke Bear，替代文字含游戏名。
+- 卡片包含游戏名、玩法、控制提示；九张卡片右侧头像统一为 Joke Bear，替代文字含游戏名。
 - 页面有跳到列表的跳转链接、可见键盘焦点和 `prefers-reduced-motion` 支持。
 - 无登录、存储、外部字体、第三方运行时请求或产品测试后门。
 
@@ -71,9 +73,9 @@ GAME_URL=https://raingor.github.io/game-hub/ npm run test:browser
 
 脚本检查 1440px 桌面与 390px、360px 触屏：
 
-- 八张卡片及十张页面图片完整加载；每张卡片头像均为 `classic.webp`（Joke Bear）；无水平溢出。
-- 桌面真实 Tab 遍历八个游戏，检查可见焦点；跳转链接进入游戏区。
-- Enter、Space 操作筛选；触屏使用真实 `tap`；检查 7/1/8 结果、ARIA 状态、恢复显示。
+- 九张卡片及十一张页面图片完整加载；每张卡片头像均为 `classic.webp`（Joke Bear）；无水平溢出。
+- 桌面真实 Tab 遍历九个游戏，检查可见焦点；跳转链接进入游戏区。
+- Enter、Space 操作筛选；触屏使用真实 `tap`；检查 7/1/1/9 结果、ARIA 状态、恢复显示。
 - 独立硬编码目标列表核对 href，实际点击每张卡片并检查同标签页最终 URL。
 - 捕获 pageerror、console error、资源 HTTP 错误与 requestfailed。
 - 检查减少动态效果设置。
@@ -88,7 +90,7 @@ GAME_URL=http://127.0.0.1:4181/ npm run test:links
 # 发布后也可以把 GAME_URL 换成导航站 Pages 地址
 ```
 
-`test:links` 通过真实卡片点击，逐项核对8个目的地的实际URL、HTTP200、游戏标题和同标签页跳转；结果写入忽略的 `artifacts/live-destinations.json`。依赖网络与远端游戏当前可用性，不将拦截替身当作实际线上游戏。
+`test:links` 通过真实卡片点击，逐项核对 9 个目的地的实际URL、HTTP200、游戏标题和同标签页跳转；结果写入忽略的 `artifacts/live-destinations.json`。依赖网络与远端游戏当前可用性，不将拦截替身当作实际线上游戏。
 
 ## 工程结构
 
@@ -101,16 +103,14 @@ src/icons.ts         iconfont 面板图标：播放、星星、爱心、票券�
 public/characters/   三张必要 WebP：卡片统一 Joke Bear 头像及两张首屏全身贴纸
 public/favicon.svg   iconfont 站台票券图标
 scripts/smoke.mjs    独立 Chrome 桌面 / 触屏验收
-scripts/live-links.mjs 不拦截请求的8款实际线上跳转验证
+scripts/live-links.mjs 不拦截请求的9款实际线上跳转验证
 ```
 
 角色素材来自同一工作区的消消乐项目，已将必要的三张 WebP **复制到本项目**；运行时无兄弟目录依赖，不包含 PNG、Three.js 或游戏源包。
 
 ## 当前验证边界
 
-2026-11-20 实跑：锁文件安装成功，主Agent独立24项单测、TypeScript及Vite构建通过。本地4181生产预览和正式Pages均完成100项桌面/手机浏览器检查，无页面/控制台/资源错误；各自另跑不拦截请求的8款真实卡片点击跳转，所有实际URL、HTTP200、游戏标题与同标签页验证通过。线上截图和报告在忽略的artifacts目录，手机为Chrome触屏上下文而非实体设备。
-
-`.github/workflows/deploy.yml` 由主协调 Agent 配置，本实现未覆盖或修改；Git、远端仓库、正式发布与记忆更新均由主协调 Agent 负责。
+2026-11-24 实跑：锁文件安装成功，主Agent独立28项单测、TypeScript及Vite构建通过。本地4181生产预览完成116项桌面/手机浏览器检查，无页面/控制台/资源错误；另跑不拦截请求的9款真实卡片点击跳转，所有实际URL、HTTP200、游戏标题与同标签页验证通过。线上截图和报告在忽略的artifacts目录，手机为Chrome触屏上下文而非实体设备。
 
 ## 图标来源
 
