@@ -97,7 +97,7 @@ src/games.ts          游戏数据与实际筛选函数
 src/games.test.ts     目的地、内容、唯一性和筛选单元测试
 src/main.ts          语义化导航页面、筛选交互
 src/style.css        响应式站台视觉与 CSS 迷你棋盘
-src/icons.ts         iconfont 面板图标：播放、方向箭头、星芒、键盘、列车与迷你棋盘符号
+src/icons.ts         iconfont 面板图标：播放、星星、爱心、票券、键盘、列车与迷你棋盘符号
 public/characters/   三张必要 WebP：卡片统一 Joke Bear 头像及两张首屏全身贴纸
 public/favicon.svg   iconfont 站台票券图标
 scripts/smoke.mjs    独立 Chrome 桌面 / 触屏验收
@@ -114,4 +114,4 @@ scripts/live-links.mjs 不拦截请求的8款实际线上跳转验证
 
 ## 图标来源
 
-页面 favicon、面板品牌/箭头/星芒/操作提示图标与迷你棋盘符号于 2026-11-23 通过 opencli 从 [iconfont.cn](https://www.iconfont.cn/) 搜索采集；图标名称、ID、搜索词与落位见 [ICONS.md](./ICONS.md)。界面图标统一以 `currentColor` 渲染，favicon 使用本项目主题色。
+页面 favicon、面板品牌/星星/爱心/票券/操作提示图标与迷你棋盘符号于 2026-11-23～24 通过 opencli 从 [iconfont.cn](https://www.iconfont.cn/) 搜索采集；图标名称、ID、搜索词与落位见 [ICONS.md](./ICONS.md)。界面图标统一以 `currentColor` 渲染，favicon 使用本项目主题色。
