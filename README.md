@@ -8,7 +8,8 @@
 - 剧情游戏：**https://raingor.github.io/joke-bear-story/**
 - 剧情游戏仓库：https://github.com/Raingor/joke-bear-story
 - 独立仓库：https://github.com/Raingor/game-hub
-- 主Agent独立28项单测及严格构建通过；本地116项浏览器检查通过。
+- 代码提交 `37d8c56`（改名与第 9 款游戏）、`9bd541c`（等待 Pages 制品注册），[Pages部署45350387682](https://github.com/Raingor/game-hub/actions/runs/45350387682)成功。
+- 主Agent独立28项单测及严格构建通过；本地与线上各116项浏览器检查、9款真实点击跳转全部通过。
 
 ## 本地运行
 

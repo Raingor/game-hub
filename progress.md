@@ -110,3 +110,5 @@ GAME_URL=http://127.0.0.1:4181/ npm run test:browser
 - 桌面改为三列等宽九宫格（三款特色卡仍保留更高画幅与大插图），1050px 以下维持两列，700px 以下特色卡整行、其余两列；修复平板规则误将手机卡片压成窄列的问题。
 - 剧情卡新增 CSS 信封场景（月亮、雨丝、蜡封）与「一封还没寄出的信」标签，不新增图片请求。
 - `npm test` 28 项通过；`npm run build` 通过；本地 4181 生产预览 116 项浏览器检查通过（九卡、十一图、四筛选、九次同标签页跳转）。
+- 提交 `37d8c56` 推送后 Pages 部署连续三次卡在制品注册（deploy-pages 查询到 0 个 artifact 或 Deployment failed），上传步骤本身成功；在 `deploy.yml` 的上传与部署之间加入 15 秒等待后，提交 `9bd541c` 的[工作流45350387682](https://github.com/Raingor/game-hub/actions/runs/45350387682)部署成功。
+- 线上 `https://raingor.github.io/game-hub/` 复核：标题「下一站，开玩 · CC乐园」，116 项浏览器检查通过；`test:links` 真实点击 9 个目的地全部 HTTP 200、标题匹配、同标签页。剧情游戏入口 `https://raingor.github.io/joke-bear-story/` 已可用。
