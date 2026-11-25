@@ -16,6 +16,17 @@ const destinations = [
   ['sliding-puzzle', 'https://raingor.github.io/sliding-puzzle/', '数字华容道'],
   ['sokoban', 'https://raingor.github.io/sokoban/', '推箱子'],
   ['joke-bear-story', 'https://raingor.github.io/joke-bear-story/', '小熊與未寄出的信'],
+  ['memory-sequence', 'https://raingor.github.io/memory-sequence/', '记忆序列'],
+  ['schulte-grid', 'https://raingor.github.io/schulte-grid/', '舒尔特方格'],
+  ['stroop-challenge', 'https://raingor.github.io/stroop-challenge/', '颜色陷阱'],
+  ['nonogram', 'https://raingor.github.io/nonogram/', '数织'],
+  ['math-24', 'https://raingor.github.io/math-24/', '24点'],
+  ['bulls-cows', 'https://raingor.github.io/bulls-cows/', '猜数字'],
+  ['lights-out', 'https://raingor.github.io/lights-out/', '关灯'],
+  ['hanoi', 'https://raingor.github.io/hanoi/', '汉诺塔'],
+  ['pipe-connect', 'https://raingor.github.io/pipe-connect/', '接水管'],
+  ['cognitive-switch', 'https://raingor.github.io/cognitive-switch/', '思维切换'],
+  ['gomoku', 'https://raingor.github.io/gomoku/', '五子棋'],
 ];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const results = [];

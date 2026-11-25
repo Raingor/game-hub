@@ -11,16 +11,28 @@ const expectedUrls: Record<string, string> = {
   'sliding-puzzle': 'https://raingor.github.io/sliding-puzzle/',
   sokoban: 'https://raingor.github.io/sokoban/',
   'joke-bear-story': 'https://raingor.github.io/joke-bear-story/',
+  'memory-sequence': 'https://raingor.github.io/memory-sequence/',
+  'schulte-grid': 'https://raingor.github.io/schulte-grid/',
+  'stroop-challenge': 'https://raingor.github.io/stroop-challenge/',
+  'nonogram': 'https://raingor.github.io/nonogram/',
+  'math-24': 'https://raingor.github.io/math-24/',
+  'bulls-cows': 'https://raingor.github.io/bulls-cows/',
+  'lights-out': 'https://raingor.github.io/lights-out/',
+  hanoi: 'https://raingor.github.io/hanoi/',
+  'pipe-connect': 'https://raingor.github.io/pipe-connect/',
+  'cognitive-switch': 'https://raingor.github.io/cognitive-switch/',
+  gomoku: 'https://raingor.github.io/gomoku/',
 };
+
 
 describe('game destinations', () => {
   it('contains exactly the requested nine games', () => {
-    expect(games).toHaveLength(9);
+    expect(games).toHaveLength(20);
     expect(games.map(game => game.slug).sort()).toEqual(Object.keys(expectedUrls).sort());
   });
   it('has unique slugs, names and URLs', () => {
     for (const key of ['slug', 'name', 'url'] as const) {
-      expect(new Set(games.map(game => game[key])).size).toBe(9);
+      expect(new Set(games.map(game => game[key])).size).toBe(20);
     }
   });
   it('uses the Joke Bear portrait for every right-side card avatar', () => {
@@ -67,12 +79,18 @@ describe('actual UI filtering function', () => {
   it('story returns only the joke bear story', () => {
     expect(filterGames('story').map(game => game.slug)).toEqual(['joke-bear-story']);
   });
+  it('brain returns the eleven brain games', () => {
+    expect(filterGames('brain').map(game => game.slug)).toEqual([
+      'memory-sequence', 'schulte-grid', 'stroop-challenge', 'nonogram', 'math-24', 'bulls-cows',
+      'lights-out', 'hanoi', 'pipe-connect', 'cognitive-switch', 'gomoku',
+    ]);
+  });
   it('repeated filters do not mutate the source list', () => {
     const before = JSON.stringify(games);
     for (let i = 0; i < 5; i++) {
-      filterGames('action'); filterGames('puzzle'); filterGames('story'); filterGames('all');
+      filterGames('action'); filterGames('puzzle'); filterGames('story'); filterGames('brain'); filterGames('all');
     }
     expect(JSON.stringify(games)).toBe(before);
-    expect(filterGames('all')).toHaveLength(9);
+    expect(filterGames('all')).toHaveLength(20);
   });
 });

@@ -25,15 +25,51 @@ function miniBoard(slug: string): string {
   return `<div class="mini-board mini-${slug}" aria-hidden="true">${(boards[slug] || []).map((cell, i) => `<span class="cell cell-${i}${cell === '' ? ' empty' : ''}">${cell === '' ? '' : boardIcons[cell] ?? cell}</span>`).join('')}</div>`;
 }
 
+function miniGrid(cells: (string | boolean)[]): string {
+  return `<div class="mini-grid" aria-hidden="true">${cells.map((value, i) => `<span class="cell cell-${i}${value === '' || value === false ? ' empty' : ''}${value === true ? ' on' : ''}">${value === '' || value === false || value === true ? '' : value}</span>`).join('')}</div>`;
+}
+
+function sceneFor(slug: string): string {
+  if (slug === 'xiaoxiaole') {
+    return '<div class="candy-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="scene-note" aria-hidden="true">啪！快乐消除中</span>';
+  }
+  if (slug === 'railway-run') {
+    return '<div class="rail-scene" aria-hidden="true"><i></i><i></i><i></i><b class="train">▰<br>▰</b></div><span class="scene-note" aria-hidden="true">READY, SET, GO!</span>';
+  }
+  if (slug === 'joke-bear-story') {
+    return '<div class="story-scene" aria-hidden="true"><span class="story-moon"></span><span class="story-rain"><i></i><i></i><i></i></span><span class="story-letter"><b></b><b></b><b></b><em></em></span></div><span class="scene-note" aria-hidden="true">一封还没寄出的信</span>';
+  }
+  switch (slug) {
+    case 'memory-sequence':
+      return '<div class="ms-pads" aria-hidden="true"><i></i><i></i><i></i><i></i></div>';
+    case 'schulte-grid':
+      return `<div class="sg-grid" aria-hidden="true">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(n => `<i>${n}</i>`).join('')}</div>`;
+    case 'stroop-challenge':
+      return '<div class="sc-word" aria-hidden="true"><span>蓝</span></div>';
+    case 'nonogram':
+      return `${miniGrid(['●', '', '●', '', '●', '', '', '●', '', '●', '', '', '●', '', '●', '', '', '●', '', '●', '', '', '●', '', '●'])}`;
+    case 'math-24':
+      return '<div class="m24-cards" aria-hidden="true"><i>2</i><i>4</i><i>6</i><i>8</i></div>';
+    case 'bulls-cows':
+      return '<div class="bc-code" aria-hidden="true"><i>3</i><i>5</i><i>8</i><i>1</i></div>';
+    case 'lights-out':
+      return `${miniGrid([false, true, false, true, false, true, false, false, false, true, false, false, true, false, false, true, false, false, false, true, false, true, false, true, false])}`;
+    case 'hanoi':
+      return '<div class="hn-pegs" aria-hidden="true"><span class="peg"><i></i><i></i><i></i></span><span class="peg"><i></i><i></i></span><span class="peg"><i></i></span></div>';
+    case 'pipe-connect':
+      return '<div class="pc-pipes" aria-hidden="true"><i></i><i></i><i></i><i></i></div>';
+    case 'cognitive-switch':
+      return '<div class="cs-shape" aria-hidden="true"><i class="a"></i><i class="b"></i></div>';
+    case 'gomoku':
+      return '<div class="gk-board" aria-hidden="true"><span class="stone black"></span><span class="stone white"></span><span class="stone white"></span><span class="stone black"></span></div>';
+    default:
+      return miniBoard(slug);
+  }
+}
+
 function card(game: Game): string {
   const number = String(games.indexOf(game) + 1).padStart(2, '0');
-  const scene = game.slug === 'xiaoxiaole'
-    ? '<div class="candy-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="scene-note" aria-hidden="true">啪！快乐消除中</span>'
-    : game.slug === 'railway-run'
-      ? '<div class="rail-scene" aria-hidden="true"><i></i><i></i><i></i><b class="train">▰<br>▰</b></div><span class="scene-note" aria-hidden="true">READY, SET, GO!</span>'
-      : game.slug === 'joke-bear-story'
-        ? '<div class="story-scene" aria-hidden="true"><span class="story-moon"></span><span class="story-rain"><i></i><i></i><i></i></span><span class="story-letter"><b></b><b></b><b></b><em></em></span></div><span class="scene-note" aria-hidden="true">一封还没寄出的信</span>'
-        : miniBoard(game.slug);
+  const scene = sceneFor(game.slug);
   const artTag = game.featured
     ? game.category === 'action' ? '动作专线' : game.category === 'story' ? '故事专线' : '快乐始发站'
     : game.tagline;
@@ -62,24 +98,24 @@ app.innerHTML = `
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-copy"><p class="eyebrow"><span class="route-symbol" aria-hidden="true">${trainIcon}</span> 开往快乐的列车 · 随时发车</p>
         <h1 id="hero-title">下一站，<br><span>开玩<span class="title-spark" aria-hidden="true">${sparkleIcon}</span></span></h1>
-        <p class="hero-description">把日常暂停一下，给快乐留个座。<br>九款小游戏，不用下载，点开就出发。</p>
+        <p class="hero-description">把日常暂停一下，给快乐留个座。<br>二十款小游戏，不用下载，点开就出发。</p>
         <a class="hero-cta" href="#games">领取你的快乐车票 <span aria-hidden="true">${ticketIcon}</span></a>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="hero-orbit"></div>
         <div class="floating-label">今日目的地：好心情</div>
-        <div class="hero-ticket"><div class="ticket-top"><span>单程快乐票</span><span>NO. 0009</span></div><div class="ticket-route"><span>日常<small>EVERYDAY</small></span><b>${heartIcon}</b><span>开玩<small>PLAYTIME</small></span></div><div class="ticket-stub"><span>不限时间 · 即刻出发</span><span class="barcode"></span></div></div>
+        <div class="hero-ticket"><div class="ticket-top"><span>单程快乐票</span><span>NO. 0020</span></div><div class="ticket-route"><span>日常<small>EVERYDAY</small></span><b>${heartIcon}</b><span>开玩<small>PLAYTIME</small></span></div><div class="ticket-stub"><span>不限时间 · 即刻出发</span><span class="barcode"></span></div></div>
         <img class="hero-bear" src="./characters/classic-full.webp" alt="" width="280" height="340" />
         <img class="hero-rabbit" src="./characters/usagi-full.webp" alt="" width="240" height="340" />
-        <span class="hero-star star-one">${sparkleIcon}</span><span class="hero-star star-two">${sparkleIcon}</span><span class="platform-sign">PLAY<br><small>PLATFORM 09</small></span>
+        <span class="hero-star star-one">${sparkleIcon}</span><span class="hero-star star-two">${sparkleIcon}</span><span class="platform-sign">PLAY<br><small>PLATFORM 20</small></span>
       </div>
     </section>
     <div class="route-band" aria-hidden="true"><div class="wrap"><span>日常暂停</span><i></i><span>快乐换乘</span><i></i><span>下一站，开玩</span><i></i><span class="band-end">GOOD TIMES AHEAD ${heartIcon}</span></div></div>
     <section class="games-section wrap" id="games" tabindex="-1" aria-labelledby="games-heading">
       <div class="section-head"><div><p class="eyebrow section-kicker">PICK YOUR NEXT STOP</p><h2 id="games-heading">今天，想在哪一站下车？</h2><p class="section-description">动动脑，或是撒腿跑。每一站都有好玩的。</p></div>
-        <div class="filters" role="group" aria-label="按游戏类型筛选"><button type="button" data-filter="all" aria-pressed="true">全部 <span>09</span></button><button type="button" data-filter="puzzle" aria-pressed="false">益智 <span>07</span></button><button type="button" data-filter="action" aria-pressed="false">动作 <span>01</span></button><button type="button" data-filter="story" aria-pressed="false">剧情 <span>01</span></button></div>
+        <div class="filters" role="group" aria-label="按游戏类型筛选"><button type="button" data-filter="all" aria-pressed="true">全部 <span>20</span></button><button type="button" data-filter="puzzle" aria-pressed="false">益智 <span>07</span></button><button type="button" data-filter="action" aria-pressed="false">动作 <span>01</span></button><button type="button" data-filter="story" aria-pressed="false">剧情 <span>01</span></button><button type="button" data-filter="brain" aria-pressed="false">脑力 <span>11</span></button></div>
       </div>
-      <p class="sr-only" id="filter-status" role="status" aria-live="polite">显示全部 9 款游戏</p>
+      <p class="sr-only" id="filter-status" role="status" aria-live="polite">显示全部 20 款游戏</p>
       <div class="game-grid">${games.map(card).join('')}</div>
       <p class="departure-note"><span aria-hidden="true">${heartIcon}</span> 点击游戏卡片，将在当前页面前往该游戏的独立站点。</p>
     </section>
@@ -89,7 +125,7 @@ app.innerHTML = `
 
 const cards = [...document.querySelectorAll<HTMLAnchorElement>('[data-game]')];
 const filterButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
-const labels: Record<Filter, string> = { all: '全部', puzzle: '益智', action: '动作', story: '剧情' };
+const labels: Record<Filter, string> = { all: '全部', puzzle: '益智', action: '动作', story: '剧情', brain: '脑力' };
 
 for (const button of filterButtons) {
   button.addEventListener('click', () => {
